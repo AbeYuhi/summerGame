@@ -7,6 +7,9 @@
 #include "TextureManager.h"
 #include "WinApp.h"
 #include "GlobalVariables.h"
+#include <iostream>
+#include <ctime>   
+#include <cstdlib>
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
@@ -77,7 +80,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		// 入力関連の毎フレーム処理
 		input->Update();
 		// グローバル変数の更新
+		#ifdef _DEBUG
 		GlobalVariables::GetInstance()->Updates();
+		#endif
 		// ゲームシーンの毎フレーム処理
 		gameScene->Update();
 		// 軸表示の更新

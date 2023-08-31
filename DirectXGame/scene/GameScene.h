@@ -14,6 +14,7 @@
 #include "Skydome.h"
 #include "Ground.h"
 #include "Player.h"
+#include "Enemy.h"
 #include "FollowCamera.h"
 
 /// <summary>
@@ -37,15 +38,45 @@ public: // メンバ関数
 	/// </summary>
 	void Initialize();
 
+	void TitleInitialize();
+	void GameInitialize();
+	void OverInitialize();
+	void EndInitialize();
+
 	/// <summary>
 	/// 毎フレーム処理
 	/// </summary>
 	void Update();
 
+	void TitleUpdate();
+
+	void InGameUpdate();
+
+	void ClearUpdate();
+
+	void OverUpdate();
+
+	void PopEnemy();
+
 	/// <summary>
 	/// 描画
 	/// </summary>
 	void Draw();
+
+	void TitleDraw();
+
+	void InGameDraw();
+
+	void ClearDraw();
+	
+	void OverDraw();
+
+	enum GameStatus {
+		Title,
+		InGame,
+		GameOver,
+		GameClear
+	};
 
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
@@ -70,4 +101,15 @@ private: // メンバ変数
 	std::unique_ptr<Model> playerWeaponModel_ = nullptr;
 	std::unique_ptr<Player> player_ = nullptr;
 
+	std::unique_ptr<Model> enemyBodyModel_ = nullptr;
+	std::list<Enemy*> enemys_;
+
+	std::unique_ptr<Sprite> gameTitleSprite_;
+	std::unique_ptr<Sprite> gameOverSprite_;
+	std::unique_ptr<Sprite> gameClearSprite_;
+
+	int frame_;
+	GameStatus gameStatus_;
+	XINPUT_STATE joyState;
+	XINPUT_STATE preJoyState;
 };

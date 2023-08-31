@@ -52,6 +52,14 @@ float Length(const Vector3& v) {
 	return length;
 }
 
+float Length(const Vector3& v1, const Vector3& v2) {
+	float length = 0;
+
+	length = sqrtf(powf(v1.x - v2.x, 2) + powf(v1.y - v2.y, 2) + powf(v1.z - v2.z, 2));
+
+	return length;
+}
+
 Vector3 Normalize(const Vector3& v1) {
 	if (v1.x == 0.0f && v1.y == 0.0f && v1.z == 0.0f) {
 		return { 0.0f, 0.0f, 0.0f };

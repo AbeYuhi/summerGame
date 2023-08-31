@@ -1,4 +1,6 @@
 #include "Player.h"
+#include "Enemy.h"
+#include "GameScene.h"
 #include "Vector3_Math.hpp"
 
 void Player::Initialize(const std::vector<Model*>& models) {
@@ -126,7 +128,7 @@ void Player::BehaviorRootUpdata() {
 		}
 
 		// スピード
-		const float speed = 0.3f;
+		const float speed = 0.5f;
 		// 移動量
 		Vector3 move = {(float)joyState.Gamepad.sThumbLX, 0.0f, (float)joyState.Gamepad.sThumbLY};
 		// 移動量を速さに反映
@@ -172,6 +174,29 @@ void Player::UpdateAttackGimmick() {
 	attackParameter_ += step;
 
 	if (attackParameter_ > 0.75f * M_PI) {
+		Vector3 center = {0, 0, 10};
+
+		Matrix4x4 rotateXMatrix = MakeRotateXMatrix(0.0f);
+		Matrix4x4 rotateYMatrix = MakeRotateYMatrix(viewProjection_->rotation_.y);
+		Matrix4x4 rotateZMatrix = MakeRotateZMatrix(0.0f);
+
+		Matrix4x4 rotateMatrix = MakeRotateXYZMatrix(rotateXMatrix, rotateYMatrix, rotateZMatrix);
+
+		center = Transform(center, rotateMatrix);
+		center += worldTransform_.translation_;
+
+		for (std::list<Enemy*>::iterator itEnemy = enemys_.begin(); itEnemy != enemys_.end();
+		     ++itEnemy) {
+			Enemy* enemy = *itEnemy;
+			Vector3 enemyPos = enemy->GetPos();
+
+			float length = Length(center, enemyPos);
+
+			if (length <= size + 1) {
+				enemy->SetIsDead(true);
+			}
+		}
+
 		behaviorRequest_ = Player::Behavior::kRoot;
 	}
 

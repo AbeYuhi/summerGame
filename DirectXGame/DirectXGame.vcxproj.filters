@@ -129,6 +129,9 @@
     <ClCompile Include="FollowCamera.cpp">
       <Filter>ソース ファイル\FollowCamera</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>ソース ファイル\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3d\ViewProjection.h">
@@ -241,6 +244,9 @@
     </ClInclude>
     <ClInclude Include="FollowCamera.h">
       <Filter>ヘッダーファイル\FollowCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>ヘッダーファイル\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

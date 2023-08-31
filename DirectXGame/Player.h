@@ -13,6 +13,8 @@
 #include "FollowCamera.h"
 #define M_PI 3.14f
 
+class Enemy;
+
 class Player : public Entity
 {
 public:
@@ -55,6 +57,8 @@ public:
 		kAttack
 	};
 
+	inline void SetEnemy(Enemy* enemy) { enemys_.push_back(enemy); }
+
 private:
 	WorldTransform worldTransformHead_;
 	WorldTransform worldTransformBody_;
@@ -73,10 +77,13 @@ private:
 
 	//
 	Vector3 keepMove_;
+	const int size = 10;
 
 	//ふるまい
 	Behavior behavior_ = Behavior::kRoot;
 	//次のふるまいリクエスト
 	std::optional<Behavior> behaviorRequest_ = Behavior::kRoot;
+
+	std::list<Enemy*> enemys_;
 };
 

@@ -9,6 +9,8 @@
 #include "FollowCamera.h"
 #define M_PI 3.14f
 
+class GameScene;
+
 class Entity
 {
 public:

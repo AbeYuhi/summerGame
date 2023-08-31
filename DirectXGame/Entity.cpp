@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include "GameScene.h"
 
 Entity::Entity(){}
 Entity::~Entity(){}

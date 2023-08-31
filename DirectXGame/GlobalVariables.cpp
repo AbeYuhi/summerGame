@@ -10,6 +10,7 @@ void GlobalVariables::CreateGroup(const std::string& groupName) {
 }
 
 void GlobalVariables::Updates() {
+#ifdef _DEBUG
 
 	if (!ImGui::Begin("Global Variables", nullptr, ImGuiWindowFlags_MenuBar)) {
 		ImGui::End();
@@ -64,6 +65,8 @@ void GlobalVariables::Updates() {
 
 	ImGui::EndMenuBar();
 	ImGui::End();
+
+#endif
 }
 
 void GlobalVariables::SaveFile(const std::string& groupName) {
