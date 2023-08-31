@@ -155,6 +155,12 @@ void Player::BehaviorRootUpdata() {
 
 		// 移動
 		worldTransform_.translation_ += move;
+
+		float length = Length({0, 0, 0}, worldTransform_.translation_);
+
+		if (length <= 5) {
+			worldTransform_.translation_ -= move;
+		}
 	}
 
 	UpdateFloatingGimmick();

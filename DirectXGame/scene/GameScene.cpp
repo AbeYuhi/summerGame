@@ -164,7 +164,9 @@ void GameScene::InGameUpdate() {
 	for (auto enemy : enemys_) {
 		enemy->Update();
 
-		if (enemy->GetT() >= 1.0f) {
+		float length = Length({0, 0, 0}, enemy->GetPos());
+
+		if (length <= 8) {
 			OverInitialize();
 			gameStatus_ = GameOver;
 		}
