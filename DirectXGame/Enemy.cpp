@@ -20,13 +20,19 @@ void Enemy::Initialize(const std::vector<Model*>& models) {
 	center = Transform(center, rotateMatrix);
 	worldTransform_.translation_ += center;
 
+	worldTransform_.scale_.x = 2;
+	worldTransform_.scale_.y = 2;
+	worldTransform_.scale_.z = 2;
+
 	spownPos = worldTransform_.translation_;
 	t = 0;
 	isDead_ = false;
+
+	worldTransform_.UpdateMatrix();
 }
 
 void Enemy::Update() {
-	t += 0.004f;
+	t += 0.003f;
 	// 移動量
 	Vector3 pos = Leap(spownPos, {0, 0, 0}, t);
 	Vector3 move = pos - RePos;

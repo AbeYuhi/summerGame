@@ -110,6 +110,7 @@ private: // メンバ変数
 	std::unique_ptr<Sprite> gameTitleSprite_;
 	std::unique_ptr<Sprite> gameOverSprite_;
 	std::unique_ptr<Sprite> gameClearSprite_;
+	std::unique_ptr<Sprite> descriptionSprite_;
 
 	int frame_;
 	GameStatus gameStatus_;

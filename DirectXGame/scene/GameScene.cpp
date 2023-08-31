@@ -24,10 +24,12 @@ void GameScene::Initialize() {
 	uint32_t gameTitleSprite = TextureManager::Load("GameTitle.png");
 	uint32_t gameOverSprite = TextureManager::Load("GameOver.png");
 	uint32_t gameClearSprite = TextureManager::Load("GameClear.png");
+	uint32_t descriptionSprite = TextureManager::Load("description.png");
 
 	gameTitleSprite_.reset(Sprite::Create(gameTitleSprite, {640, 360}, {1, 1, 1, 1}, {0.5, 0.5}));
 	gameOverSprite_.reset(Sprite::Create(gameOverSprite, {640, 360}, {1, 1, 1, 1}, {0.5, 0.5}));
 	gameClearSprite_.reset(Sprite::Create(gameClearSprite, {640, 360}, {1, 1, 1, 1}, {0.5, 0.5}));
+	descriptionSprite_.reset(Sprite::Create(descriptionSprite, {640, 360}, {1, 1, 1, 1}, {0.5, 0.5}));
 
 	cubeTransform_.Initialize();
 	cubeTransform_.scale_.x = 5;
@@ -55,6 +57,8 @@ void GameScene::TitleInitialize() {
 }
 
 void GameScene::GameInitialize() {
+	enemys_.clear();
+
 	// カメラ関連
 	followCamera_ = std::make_unique<FollowCamera>();
 	followCamera_->Initialize();
@@ -314,6 +318,8 @@ void GameScene::InGameDraw() {
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
+
+	descriptionSprite_->Draw();
 
 	// スプライト描画後処理
 	Sprite::PostDraw();

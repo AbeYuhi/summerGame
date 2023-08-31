@@ -194,7 +194,7 @@ void Player::UpdateAttackGimmick() {
 
 			float length = Length(center, enemyPos);
 
-			if (length <= size + 1) {
+			if (length <= size + 3) {
 				enemy->SetIsDead(true);
 			}
 		}
