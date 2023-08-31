@@ -32,7 +32,7 @@ void Enemy::Initialize(const std::vector<Model*>& models) {
 }
 
 void Enemy::Update() {
-	t += 0.003f;
+	t += 0.002f;
 	// 移動量
 	Vector3 pos = Leap(spownPos, {0, 0, 0}, t);
 	Vector3 move = pos - RePos;

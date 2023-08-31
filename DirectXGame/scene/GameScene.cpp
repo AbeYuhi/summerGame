@@ -150,7 +150,7 @@ void GameScene::InGameUpdate() {
 	ground_->Update();
 	player_->Update();
 
-	if (frame_ % 60 == 0) {
+	if (frame_ % 90 == 0) {
 		PopEnemy();
 	}
 

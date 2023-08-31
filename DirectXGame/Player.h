@@ -77,7 +77,7 @@ private:
 
 	//
 	Vector3 keepMove_;
-	const int size = 10;
+	const int size = 5;
 
 	//ふるまい
 	Behavior behavior_ = Behavior::kRoot;

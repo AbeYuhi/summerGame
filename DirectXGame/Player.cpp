@@ -158,7 +158,7 @@ void Player::BehaviorRootUpdata() {
 
 		float length = Length({0, 0, 0}, worldTransform_.translation_);
 
-		if (length <= 5) {
+		if (length <= 6) {
 			worldTransform_.translation_ -= move;
 		}
 	}
@@ -173,7 +173,7 @@ void Player::BehaviorAttackUpdata() {
 
 void Player::InitializeAttackGimmick() {
 	attackParameter_ = 0.0f;
-	attackCycle_ = 30;
+	attackCycle_ = 20;
 }
 
 void Player::UpdateAttackGimmick() {
@@ -182,7 +182,7 @@ void Player::UpdateAttackGimmick() {
 	attackParameter_ += step;
 
 	if (attackParameter_ > 0.75f * M_PI) {
-		Vector3 center = {0, 0, 10};
+		Vector3 center = {0, 0, 5};
 
 		Matrix4x4 rotateXMatrix = MakeRotateXMatrix(0.0f);
 		Matrix4x4 rotateYMatrix = MakeRotateYMatrix(viewProjection_->rotation_.y);
@@ -190,7 +190,7 @@ void Player::UpdateAttackGimmick() {
 
 		Matrix4x4 rotateMatrix = MakeRotateXYZMatrix(rotateXMatrix, rotateYMatrix, rotateZMatrix);
 
-		center = Transform(center, rotateMatrix);
+		center = TransformNormal(keepMove_, rotateMatrix) * 25;
 		center += worldTransform_.translation_;
 
 		for (std::list<Enemy*>::iterator itEnemy = enemys_.begin(); itEnemy != enemys_.end();
@@ -200,7 +200,7 @@ void Player::UpdateAttackGimmick() {
 
 			float length = Length(center, enemyPos);
 
-			if (length <= size + 3) {
+			if (length <= size + 1) {
 				enemy->SetIsDead(true);
 			}
 		}
