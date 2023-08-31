@@ -18,6 +18,8 @@ void Player::Initialize(const std::vector<Model*>& models) {
 	worldTransformRightArm_.parent_ = &worldTransformBody_;
 	worldTransformWeapon_.parent_ = &worldTransformBody_;
 
+	worldTransform_.translation_.z = -10;
+
 	InitializeFloatingGimmick();
 	InitializeAttackGimmick();
 

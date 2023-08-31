@@ -20,6 +20,7 @@ void GameScene::Initialize() {
 	playerRightArmModel_.reset(Model::CreateFromOBJ("PRightArm", true));
 	playerWeaponModel_.reset(Model::CreateFromOBJ("Hummer", true));
 	enemyBodyModel_.reset(Model::CreateFromOBJ("Enemy", true));
+	cubeModel_.reset(Model::Create());
 	uint32_t gameTitleSprite = TextureManager::Load("GameTitle.png");
 	uint32_t gameOverSprite = TextureManager::Load("GameOver.png");
 	uint32_t gameClearSprite = TextureManager::Load("GameClear.png");
@@ -27,6 +28,13 @@ void GameScene::Initialize() {
 	gameTitleSprite_.reset(Sprite::Create(gameTitleSprite, {640, 360}, {1, 1, 1, 1}, {0.5, 0.5}));
 	gameOverSprite_.reset(Sprite::Create(gameOverSprite, {640, 360}, {1, 1, 1, 1}, {0.5, 0.5}));
 	gameClearSprite_.reset(Sprite::Create(gameClearSprite, {640, 360}, {1, 1, 1, 1}, {0.5, 0.5}));
+
+	cubeTransform_.Initialize();
+	cubeTransform_.scale_.x = 5;
+	cubeTransform_.scale_.y = 5;
+	cubeTransform_.scale_.z = 5;
+	cubeTransform_.translation_.y = 5;
+	cubeTransform_.UpdateMatrix();
 
 	TitleInitialize();
 	
@@ -289,6 +297,7 @@ void GameScene::InGameDraw() {
 
 	ground_->Draw(followCamera_.get());
 	skydome_->Draw(followCamera_.get());
+	cubeModel_->Draw(cubeTransform_, followCamera_->GetViewProjection());
 	player_->Draw(followCamera_.get());
 	for (auto enemy : enemys_) {
 		enemy->Draw(followCamera_.get());

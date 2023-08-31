@@ -104,6 +104,9 @@ private: // メンバ変数
 	std::unique_ptr<Model> enemyBodyModel_ = nullptr;
 	std::list<Enemy*> enemys_;
 
+	WorldTransform cubeTransform_;
+	std::unique_ptr<Model> cubeModel_ = nullptr;
+
 	std::unique_ptr<Sprite> gameTitleSprite_;
 	std::unique_ptr<Sprite> gameOverSprite_;
 	std::unique_ptr<Sprite> gameClearSprite_;

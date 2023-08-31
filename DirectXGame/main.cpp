@@ -7,9 +7,7 @@
 #include "TextureManager.h"
 #include "WinApp.h"
 #include "GlobalVariables.h"
-#include <iostream>
-#include <ctime>   
-#include <cstdlib>
+#include <time.h>
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
@@ -67,6 +65,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// ゲームシーンの初期化
 	gameScene = new GameScene();
 	gameScene->Initialize();
+
+	//乱数の初期化
+	UINT currentTime = (UINT)time(nullptr);
+	srand(currentTime);
 
 	// メインループ
 	while (true) {

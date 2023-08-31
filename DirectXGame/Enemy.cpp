@@ -7,11 +7,18 @@ Enemy::~Enemy() {}
 
 void Enemy::Initialize(const std::vector<Model*>& models) {
 	Entity::Initialize(models);
+	Vector3 center = {0, 0, 75};
+	float rotation = float(rand() % 614);
+	rotation /= 100;
 
-	worldTransform_.translation_.z = 50;
-	worldTransform_.translation_.x = 50;
-	//int rotattion = rand() % 360;
+	Matrix4x4 rotateXMatrix = MakeRotateXMatrix(0.0f);
+	Matrix4x4 rotateYMatrix = MakeRotateYMatrix(rotation);
+	Matrix4x4 rotateZMatrix = MakeRotateZMatrix(0.0f);
 
+	Matrix4x4 rotateMatrix = MakeRotateXYZMatrix(rotateXMatrix, rotateYMatrix, rotateZMatrix);
+
+	center = Transform(center, rotateMatrix);
+	worldTransform_.translation_ += center;
 
 	spownPos = worldTransform_.translation_;
 	t = 0;
@@ -19,14 +26,12 @@ void Enemy::Initialize(const std::vector<Model*>& models) {
 }
 
 void Enemy::Update() {
-	t += 0.005f;
-	// スピード
-	const float speed = 0.2f;
+	t += 0.004f;
 	// 移動量
 	Vector3 pos = Leap(spownPos, {0, 0, 0}, t);
 	Vector3 move = pos - RePos;
 	// 移動量を速さに反映
-	move = Normalize(move) * speed;
+	move = Normalize(move);
 
 	// 回転
 	worldTransform_.rotation_.y = atan2f(move.x, move.z);
